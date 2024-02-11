@@ -1,0 +1,44 @@
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX HealthFacility: <http://www.semanticweb.org/ontologies/Kenya-health-facilities#>
+
+SELECT ?County
+       ?KephLevel
+       (COUNT(?Level1) AS ?Level1Count)
+       (COUNT(?Level2) AS ?Level2Count)
+       (COUNT(?Level3) AS ?Level3Count)
+       (COUNT(?Level4) AS ?Level4Count)
+       (COUNT(?Level5) AS ?Level5Count)
+       (COUNT(?Level6) AS ?Level6Count)
+WHERE {
+  ?facility rdf:type HealthFacility:Code ;
+            HealthFacility:County ?County ;
+            HealthFacility:KephLevel ?KephLevel .
+
+  OPTIONAL {
+    ?facility HealthFacility:KephLevel "Level 1" .
+    BIND(?facility AS ?Level1)
+  }
+  OPTIONAL {
+    ?facility HealthFacility:KephLevel "Level 2" .
+    BIND(?facility AS ?Level2)
+  }
+  OPTIONAL {
+    ?facility HealthFacility:KephLevel "Level 3" .
+    BIND(?facility AS ?Level3)
+  }
+  OPTIONAL {
+    ?facility HealthFacility:KephLevel "Level 4" .
+    BIND(?facility AS ?Level4)
+  }
+  OPTIONAL {
+    ?facility HealthFacility:KephLevel "Level 5" .
+    BIND(?facility AS ?Level5)
+  }
+  OPTIONAL {
+    ?facility HealthFacility:KephLevel "Level 6" .
+    BIND(?facility AS ?Level6)
+  }
+}
+GROUP BY ?County ?KephLevel
+ORDER BY ?County ?KephLevel
+

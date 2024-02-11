@@ -1,0 +1,83 @@
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX HealthFacility: <http://www.semanticweb.org/ontologies/Kenya-health-facilities#>
+
+SELECT ?FacilityType
+       (COUNT(?Level1) AS ?Level1Count)
+       (COUNT(?Level2) AS ?Level2Count)
+       (COUNT(?Level3) AS ?Level3Count)
+       (COUNT(?Level4) AS ?Level4Count)
+       (COUNT(?Level5) AS ?Level5Count)
+       (COUNT(?Level6) AS ?Level6Count)
+WHERE {
+  {
+    SELECT ?FacilityType ?individual ?KephLevel
+    WHERE {
+      ?individual rdf:type HealthFacility:Code ;
+                  HealthFacility:FacilityType ?FacilityType ;
+                  HealthFacility:KephLevel ?KephLevel .
+    }
+  }
+
+  OPTIONAL {
+    SELECT ?FacilityType (COUNT(?individual) AS ?Level1)
+    WHERE {
+      ?individual rdf:type HealthFacility:Code ;
+                  HealthFacility:FacilityType ?FacilityType ;
+                  HealthFacility:KephLevel "Level 1" .
+    }
+    GROUP BY ?FacilityType
+  }
+
+  OPTIONAL {
+    SELECT ?FacilityType (COUNT(?individual) AS ?Level2)
+    WHERE {
+      ?individual rdf:type HealthFacility:Code ;
+                  HealthFacility:FacilityType ?FacilityType ;
+                  HealthFacility:KephLevel "Level 2" .
+    }
+    GROUP BY ?FacilityType
+  }
+
+  OPTIONAL {
+    SELECT ?FacilityType (COUNT(?individual) AS ?Level3)
+    WHERE {
+      ?individual rdf:type HealthFacility:Code ;
+                  HealthFacility:FacilityType ?FacilityType ;
+                  HealthFacility:KephLevel "Level 3" .
+    }
+    GROUP BY ?FacilityType
+  }
+
+  OPTIONAL {
+    SELECT ?FacilityType (COUNT(?individual) AS ?Level4)
+    WHERE {
+      ?individual rdf:type HealthFacility:Code ;
+                  HealthFacility:FacilityType ?FacilityType ;
+                  HealthFacility:KephLevel "Level 4" .
+    }
+    GROUP BY ?FacilityType
+  }
+
+  OPTIONAL {
+    SELECT ?FacilityType (COUNT(?individual) AS ?Level5)
+    WHERE {
+      ?individual rdf:type HealthFacility:Code ;
+                  HealthFacility:FacilityType ?FacilityType ;
+                  HealthFacility:KephLevel "Level 5" .
+    }
+    GROUP BY ?FacilityType
+  }
+
+  OPTIONAL {
+    SELECT ?FacilityType (COUNT(?individual) AS ?Level6)
+    WHERE {
+      ?individual rdf:type HealthFacility:Code ;
+                  HealthFacility:FacilityType ?FacilityType ;
+                  HealthFacility:KephLevel "Level 6" .
+    }
+    GROUP BY ?FacilityType
+  }
+}
+GROUP BY ?FacilityType
+ORDER BY ?FacilityType
+

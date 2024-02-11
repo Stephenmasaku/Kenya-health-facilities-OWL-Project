@@ -1,0 +1,13 @@
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX HealthFacility: <http://www.semanticweb.org/ontologies/Kenya-health-facilities#>
+
+SELECT ?individual ?KephLevel ?RegulatoryBody ?FacilityType ?Owner
+WHERE {
+  ?individual rdf:type HealthFacility:Code ;
+              HealthFacility:KephLevel ?KephLevel ;
+              HealthFacility:RegulatoryBody ?RegulatoryBody ;
+              HealthFacility:FacilityType ?FacilityType ;
+              HealthFacility:Owner ?Owner ;
+              HealthFacility:Registration_number "None" .
+}
+

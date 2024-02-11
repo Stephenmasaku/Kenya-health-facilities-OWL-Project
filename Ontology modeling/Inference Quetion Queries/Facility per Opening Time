@@ -1,0 +1,15 @@
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX HealthFacility: <http://www.semanticweb.org/ontologies/Kenya-health-facilities#>
+
+SELECT ?Code ?County ?Ward ?FacilityType
+WHERE {
+  ?facility rdf:type HealthFacility:Code ;
+            HealthFacility:County ?County ;
+            HealthFacility:Ward ?Ward ;
+            HealthFacility:FacilityType ?FacilityType ;
+            HealthFacility:Open_late_night "Yes" ;
+            HealthFacility:Open_public_holidays "Yes" ;
+            HealthFacility:Open_whole_day "Yes" ;
+            HealthFacility:Code ?Code .
+}
+

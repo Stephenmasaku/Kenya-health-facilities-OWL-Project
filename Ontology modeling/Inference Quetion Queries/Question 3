@@ -1,0 +1,12 @@
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX HealthFacility: <http://www.semanticweb.org/ontologies/Kenya-health-facilities#>
+
+SELECT ?County ?FacilityType (COUNT(?facility) AS ?FacilityCount)
+WHERE {
+  ?facility rdf:type HealthFacility:Code ;
+            HealthFacility:County ?County ;
+            HealthFacility:FacilityType ?FacilityType .
+}
+GROUP BY ?County ?FacilityType
+ORDER BY ?County ?FacilityType
+

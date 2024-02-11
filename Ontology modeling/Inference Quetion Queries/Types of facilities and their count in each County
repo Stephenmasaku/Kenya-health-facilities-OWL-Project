@@ -1,0 +1,93 @@
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX HealthFacility: <http://www.semanticweb.org/ontologies/Kenya-health-facilities#>
+
+SELECT ?County
+       (COUNT(?facility) AS ?TotalFacilities)
+       (COUNT(?AdminOffice) AS ?AdministrativeOfficesCount)
+       (COUNT(?BasicPrimary) AS ?BasicPrimaryHealthCareFacilityCount)
+       (COUNT(?BloodBank) AS ?BloodBankCount)
+       (COUNT(?ComprehensiveTeaching) AS ?ComprehensiveTeachingReferralCount)
+       (COUNT(?ComprehensivePrimary) AS ?ComprehensivePrimaryHealthCareFacilityCount)
+       (COUNT(?Dispensaries) AS ?DispensariesClinicOutpatientCount)
+       (COUNT(?FarewellHome) AS ?FarewellHomeCount)
+       (COUNT(?Hospitals) AS ?HospitalsCount)
+       (COUNT(?Lab) AS ?LaboratoryCount)
+       (COUNT(?Pharmacy) AS ?PharmacyCount)
+       (COUNT(?PrimaryHospitals) AS ?PrimaryCareHospitalsCount)
+       (COUNT(?PrimaryHealth) AS ?PrimaryHealthCareServicesCount)
+       (COUNT(?Radiology) AS ?RadiologyClinicCount)
+       (COUNT(?BloodTransfusion) AS ?RegionalBloodTransfusionCentreCount)
+       (COUNT(?SecondaryHospitals) AS ?SecondaryCareHospitalsCount)
+       (COUNT(?VCT) AS ?VCTCount)
+WHERE {
+  ?facility rdf:type HealthFacility:Code ;
+            HealthFacility:County ?County .
+
+  OPTIONAL {
+    ?facility HealthFacility:FacilityType "Administrative Offices" .
+    BIND(?facility AS ?AdminOffice)
+  }
+  OPTIONAL {
+    ?facility HealthFacility:FacilityType "Basic primary health care facility" .
+    BIND(?facility AS ?BasicPrimary)
+  }
+  OPTIONAL {
+    ?facility HealthFacility:FacilityType "Blood Bank" .
+    BIND(?facility AS ?BloodBank)
+  }
+  OPTIONAL {
+    ?facility HealthFacility:FacilityType "Comprehensive Teaching &Referral" .
+    BIND(?facility AS ?ComprehensiveTeaching)
+  }
+  OPTIONAL {
+    ?facility HealthFacility:FacilityType "Comprehensive primary health care facility" .
+    BIND(?facility AS ?ComprehensivePrimary)
+  }
+  OPTIONAL {
+    ?facility HealthFacility:FacilityType "Dispensaries and clinic-out patient only" .
+    BIND(?facility AS ?Dispensaries)
+  }
+  OPTIONAL {
+    ?facility HealthFacility:FacilityType "Farewell Home" .
+    BIND(?facility AS ?FarewellHome)
+  }
+  OPTIONAL {
+    ?facility HealthFacility:FacilityType "Hospitals" .
+    BIND(?facility AS ?Hospitals)
+  }
+  OPTIONAL {
+    ?facility HealthFacility:FacilityType "Laboratory" .
+    BIND(?facility AS ?Lab)
+  }
+  OPTIONAL {
+    ?facility HealthFacility:FacilityType "Pharmacy" .
+    BIND(?facility AS ?Pharmacy)
+  }
+  OPTIONAL {
+    ?facility HealthFacility:FacilityType "Primary care hospitals" .
+    BIND(?facility AS ?PrimaryHospitals)
+  }
+  OPTIONAL {
+    ?facility HealthFacility:FacilityType "Primary health care services" .
+    BIND(?facility AS ?PrimaryHealth)
+  }
+  OPTIONAL {
+    ?facility HealthFacility:FacilityType "Radiology Clinic" .
+    BIND(?facility AS ?Radiology)
+  }
+  OPTIONAL {
+    ?facility HealthFacility:FacilityType "Regional Blood Transfusion Centre" .
+    BIND(?facility AS ?BloodTransfusion)
+  }
+  OPTIONAL {
+    ?facility HealthFacility:FacilityType "Secondary care hospitals" .
+    BIND(?facility AS ?SecondaryHospitals)
+  }
+  OPTIONAL {
+    ?facility HealthFacility:FacilityType "VCT" .
+    BIND(?facility AS ?VCT)
+  }
+}
+GROUP BY ?County
+ORDER BY ?County
+
